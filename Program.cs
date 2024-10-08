@@ -5,7 +5,33 @@
         static void Main(string[] args)
         {
 
-            AddingEmployeeOperation();
+
+
+            Console.WriteLine("Co chcesz dzisiaj zrobić");
+            Console.WriteLine("");
+
+            Console.WriteLine("1. Wyświetlić wszystkich pracowników");
+            Console.WriteLine("2. Dodać nowego pracownika");
+            Console.WriteLine("3. Usunąć pracownika po wpisanym Id");
+            Console.WriteLine("4. Wyszukać pracownika po jego nazwisku");
+
+            int menu = Convert.ToInt32(Console.ReadLine());
+
+            switch (menu)
+            {
+                case 1:
+                    DisplayAllEmployeesOperation();
+                    break;
+                case 2:
+                    AddingEmployeeOperation();
+                    break;
+                case 3:
+                    DeleteEmployeeByTypingHisIdOperation();
+                    break;
+                case 4:
+                    SearchEmployeeByHisLastNameOperation();
+                    break;
+            }
 
 
 
@@ -14,7 +40,7 @@
 
         static void AddingEmployeeOperation()
         {
-            var controller1 = new Controllers();
+            var controller1 = new ControlEmployee();
 
 
             Console.WriteLine("Podaj dane pracownika:");
@@ -50,6 +76,29 @@
             //int employeeId = Convert.ToInt32(Console.ReadLine());
 
             //controller1.DeleteEmployee(employeeId);
+        }
+
+        static void DisplayAllEmployeesOperation()
+        {
+            var controller2 = new ControlEmployee();
+
+            controller2.DisplayEmployee();
+        }
+
+        static void DeleteEmployeeByTypingHisIdOperation()
+        {
+            var controller3 = new ControlEmployee();
+
+            Console.WriteLine("Podaj Id pracownika, którego chcesz usunąć z bazy danych");
+
+            controller3.DeleteEmployee(Convert.ToInt32(Console.ReadLine()));
+        }
+
+        static void SearchEmployeeByHisLastNameOperation()
+        {
+            var controller4 = new ControlEmployee();
+
+            controller4.SearchEmployee();
         }
     }
 }

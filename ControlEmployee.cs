@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace LoginMaster
 {
-    public class Controllers
+    public class ControlEmployee
     {
-        public Controllers()
+        public ControlEmployee()
         {
 
-        }
+        } //default controller for database
+
         public void DisplayEmployee()
         {
             using (var context = new MyDbContext())
@@ -46,15 +47,6 @@ namespace LoginMaster
             }
         }
 
-        public void UpdateEmployee(Employees employee)
-        {
-            using (var context = new MyDbContext())
-            {
-                context.Employees.Update(employee);
-                context.SaveChanges();
-            }
-        }
-
         public void DeleteEmployee(int employeeIdToDelete)
         {
             using (var context = new MyDbContext())
@@ -75,6 +67,27 @@ namespace LoginMaster
                 {
                     Console.WriteLine("Nie ma pracownika o takim id");
                 }
+            }
+        }
+
+        public void SearchEmployee()
+        {
+            using (var context = new MyDbContext())
+            {
+                Console.WriteLine("Podaj nazwisko pracownika, którego chcesz wyszukać, żeby zobaczyć jego dane lub go usunąć.");
+
+                string lastName = Console.ReadLine();
+
+                var employees = context.Employees.Where(x  => x.FirstName.ToLower() == lastName.ToLower()).ToList();
+
+                foreach (var employee in employees)
+                {
+                    Console.WriteLine($"Id {employee.Id} Imie {employee.Position} Nazwisko {employee.FirstName}");
+                }
+                //w bazie danych 
+                //position to imie
+                //imie to nazwisko
+                //nazwisko to position
             }
         }
     }
