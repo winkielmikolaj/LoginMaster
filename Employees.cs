@@ -11,6 +11,9 @@ public class Employees
     public string? Address { get; set; }
     public string? City { get; set; }
 
+    public Employees() //deafult constructor
+    {
+    }
 
     public Employees(int id, string? position, string? firstName, string? lastName, string? email, int? phoneNumber, string? address, string? city)
     {
