@@ -10,6 +10,7 @@ namespace LoginMaster
     internal class MyDbContext : DbContext
     {
         public DbSet<Employees> Employees { get; set; }
+        public DbSet<Warehouse> Warehouse { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

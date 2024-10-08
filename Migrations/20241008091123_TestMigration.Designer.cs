@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LoginMaster.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20241008090332_TestMigration")]
+    [Migration("20241008091123_TestMigration")]
     partial class TestMigration
     {
         /// <inheritdoc />
@@ -57,6 +57,28 @@ namespace LoginMaster.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("LoginMaster.Warehouse", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Warehouse");
                 });
 #pragma warning restore 612, 618
         }
