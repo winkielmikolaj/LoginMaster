@@ -26,9 +26,5 @@ public class Employees
         Address = address;
         City = city;
     }
-
-    public void DisplayEmployee()
-    {
-        Console.WriteLine($"Id: {Id} imie: {FirstName} {LastName}");
-    }
+   
 }
