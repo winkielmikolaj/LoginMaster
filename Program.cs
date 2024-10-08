@@ -5,14 +5,14 @@
         static void Main(string[] args)
         {
 
-            FrontentAddingEmployee();
+            AddingEmployeeOperation();
 
 
 
             Console.ReadLine();
         }
 
-        static void FrontentAddingEmployee()
+        static void AddingEmployeeOperation()
         {
             var controller1 = new Controllers();
 
