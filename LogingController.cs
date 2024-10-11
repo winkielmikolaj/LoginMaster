@@ -10,7 +10,25 @@ namespace LoginMaster
     {
         public LogingController()
         {
-           
+
+        }
+
+        public void AddingUsersByAdmin(string username, string password, string email, bool isAdmin)
+        {
+            var user = new User
+            {
+                Username = username,
+                Password = password,
+                Email = email,
+                IsAdmin = isAdmin
+            };
+
+            using (var context = new MyDbContext())
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+
         }
 
         public void DisplayingAllUsersByAdmin()
@@ -26,9 +44,9 @@ namespace LoginMaster
             }
         }
 
-        
+
     }
 
 
-    
+
 }
