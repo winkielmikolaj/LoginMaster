@@ -11,6 +11,7 @@ namespace LoginMaster
     {
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Warehouse> Warehouse { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
