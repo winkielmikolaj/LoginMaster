@@ -1,6 +1,6 @@
 ﻿namespace LoginMaster
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -8,7 +8,7 @@
 
             Console.ReadLine();
         }
-        static void WholeMenuOperation()
+        public static void WholeAdminMenuOperation()
         {
             Console.WriteLine("Co chcesz dzisiaj zrobić");
             Console.WriteLine("");
@@ -51,13 +51,45 @@
 
                     break;
             }
-
-
-
-            Console.ReadLine();
         }
 
 
+
+        public static void WholeUserOpeation()
+        {
+            var loggingcontroller4 = new LogingController();
+
+            Console.WriteLine("Witaj Co chcesz dzisiaj zrobić ");
+            Console.WriteLine("");
+
+            Console.WriteLine("1. Otworzyć magazyn");
+            Console.WriteLine("2. Dodać nową rzecz do magazynu");
+            Console.WriteLine("3. Usunąć rzecz z magazynu");
+            Console.WriteLine("4. Wyszukać element z magazynu po jego Id");
+
+            int menuEmployee = Convert.ToInt32(Console.ReadLine());
+
+            switch (menuEmployee)
+            {
+                case 1:
+                    //magazyn diplay
+                    break;
+                case 2:
+                    //dodac do magazynu
+                    break;
+                case 3:
+                    //usunac z magazynu
+                    break;
+                case 4:
+                    //wyszukac element z magazynu po jego id
+                    break;
+            }
+
+
+
+
+
+        }
 
         static void AddingEmployeeOperation()
         {
@@ -203,7 +235,6 @@
                     break;
             }
         }
-
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LoginMaster.Migrations;
+using Npgsql.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,15 @@ namespace LoginMaster
 {
     internal class LogingController
     {
+
         public LogingController()
         {
 
         }
         public void LoggingOnTheStart()
         {
+            var program = new Program();
+
             using (var context = new MyDbContext())
             {
                 Console.WriteLine("Podaj nazwę użytkownika:");
@@ -26,6 +30,7 @@ namespace LoginMaster
                 // Sprawdzanie, czy użytkownik istnieje i czy dane logowania są poprawne
                 var loggedInUser = context.Users.FirstOrDefault(u => u.Username == inputUsername && u.Password == inputPassword);
 
+
                 if (loggedInUser != null)
                 {
                     Console.WriteLine("Logowanie zakończone sukcesem!");
@@ -33,11 +38,13 @@ namespace LoginMaster
                     if ((bool)loggedInUser.IsAdmin)
                     {
                         Console.WriteLine("Witaj, Administratorze.");
+                        Program.WholeAdminMenuOperation();
                         // Kod dla administratora
                     }
                     else
                     {
                         Console.WriteLine("Witaj, Użytkowniku.");
+                        Program.WholeUserOpeation();
                         // Kod dla zwykłego użytkownika
                     }
                 }
