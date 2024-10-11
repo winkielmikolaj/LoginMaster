@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoginMaster.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,40 @@ namespace LoginMaster
         public LogingController()
         {
 
+        }
+        public void LoggingOnTheStart()
+        {
+            using (var context = new MyDbContext())
+            {
+                Console.WriteLine("Podaj nazwę użytkownika:");
+                string inputUsername = Console.ReadLine();
+
+                Console.WriteLine("Podaj hasło:");
+                string inputPassword = Console.ReadLine();
+
+                // Sprawdzanie, czy użytkownik istnieje i czy dane logowania są poprawne
+                var loggedInUser = context.Users.FirstOrDefault(u => u.Username == inputUsername && u.Password == inputPassword);
+
+                if (loggedInUser != null)
+                {
+                    Console.WriteLine("Logowanie zakończone sukcesem!");
+
+                    if ((bool)loggedInUser.IsAdmin)
+                    {
+                        Console.WriteLine("Witaj, Administratorze.");
+                        // Kod dla administratora
+                    }
+                    else
+                    {
+                        Console.WriteLine("Witaj, Użytkowniku.");
+                        // Kod dla zwykłego użytkownika
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Nieprawidłowa nazwa użytkownika lub hasło.");
+                }
+            }
         }
 
         public void AddingUsersByAdmin(string username, string password, string email, bool isAdmin)

@@ -4,22 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("WITAMY W APLIKACJI LOGIN MASTER. CO CHCIAŁBYŚ ZROBIĆ?");
-            Console.WriteLine("Logowanie - wpisz L | Rejestracja - wpisz R");
+            LoggingFormOperation();
 
-            char wybórAkcjiLogowanieRejestracja = Convert.ToChar(Console.ReadLine());
-
-            switch (wybórAkcjiLogowanieRejestracja)
-            {
-                case 'L':
-
-                    break;
-                case 'R':
-                    RegisterFormOperation();
-                    break;
-            }
-
-            //WholeMenuOperation();
+            Console.ReadLine();
         }
         static void WholeMenuOperation()
         {
@@ -195,6 +182,26 @@
             loggingcontroller2.AddingUsersByAdmin(username, password, email, isAmdmin);
 
             Console.WriteLine("Pomyślnie zarejestrowano!");
+        }
+
+        static void LoggingFormOperation()
+        {
+            var loggingcontroller3 = new LogingController();
+
+            Console.WriteLine("WITAMY W APLIKACJI LOGIN MASTER. CO CHCIAŁBYŚ ZROBIĆ?");
+            Console.WriteLine("Logowanie - wpisz L | Rejestracja - wpisz R");
+
+            char wybórAkcjiLogowanieRejestracja = Convert.ToChar(Console.ReadLine());
+
+            switch (wybórAkcjiLogowanieRejestracja)
+            {
+                case 'L':
+                    loggingcontroller3.LoggingOnTheStart();
+                    break;
+                case 'R':
+                    RegisterFormOperation();
+                    break;
+            }
         }
 
 
