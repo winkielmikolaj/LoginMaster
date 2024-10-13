@@ -49,6 +49,8 @@ namespace LoginMaster
 
         public void DeleteEmployee(int employeeIdToDelete)
         {
+            
+
             using (var context = new MyDbContext())
             {
                
@@ -80,10 +82,19 @@ namespace LoginMaster
 
                 var employees = context.Employees.Where(x  => x.FirstName.ToLower() == lastName.ToLower()).ToList();
 
-                foreach (var employee in employees)
+                if (employees != null)
                 {
-                    Console.WriteLine($"Id {employee.Id} Imie {employee.Position} Nazwisko {employee.FirstName}");
+                    foreach (var employee in employees)
+                    {
+                        Console.WriteLine($"Id {employee.Id} Imie {employee.Position} Nazwisko {employee.FirstName}");
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Nie ma takiego pracownika w naszej firmie!");
+                }
+
+
                 //w bazie danych 
                 //position to imie
                 //imie to nazwisko

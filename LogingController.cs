@@ -30,20 +30,28 @@ namespace LoginMaster
                 // Sprawdzanie, czy użytkownik istnieje i czy dane logowania są poprawne
                 var loggedInUser = context.Users.FirstOrDefault(u => u.Username == inputUsername && u.Password == inputPassword);
 
+                
+
 
                 if (loggedInUser != null)
                 {
+                    Console.Clear();
+
+                    string welcomeMessage = $"Witaj {loggedInUser.Username}! Co chcesz dzisiaj zrobić?";
+                    int centerX = (Console.WindowWidth - welcomeMessage.Length) / 2; // Pozycjonowanie
+                    Console.SetCursorPosition(centerX, Console.CursorTop);
+                    Console.WriteLine(welcomeMessage); // Wyświetlenie powitania
+
+
                     Console.WriteLine("Logowanie zakończone sukcesem!");
 
                     if ((bool)loggedInUser.IsAdmin)
                     {
-                        Console.WriteLine("Witaj, Administratorze.");
                         Program.WholeAdminMenuOperation();
                         // Kod dla administratora
                     }
                     else
                     {
-                        Console.WriteLine("Witaj, Użytkowniku.");
                         Program.WholeUserOpeation();
                         // Kod dla zwykłego użytkownika
                     }

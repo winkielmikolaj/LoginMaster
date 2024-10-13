@@ -1,4 +1,6 @@
-﻿namespace LoginMaster
+﻿using System.Runtime.CompilerServices;
+
+namespace LoginMaster
 {
     public class Program
     {
@@ -8,10 +10,10 @@
 
             Console.ReadLine();
         }
+
+        //menu by admin
         public static void WholeAdminMenuOperation()
         {
-            Console.WriteLine("Co chcesz dzisiaj zrobić");
-            Console.WriteLine("");
 
             Console.WriteLine("1. Wyświetlić wszystkich pracowników");
             Console.WriteLine("2. Dodać nowego pracownika");
@@ -39,58 +41,97 @@
                     SearchEmployeeByHisLastNameOperation();
                     break;
                 case 5:
-
+                    DisplayWholeWarehouseOperation();
                     break;
                 case 6:
-
+                    AddingNewItemIntoWarehouseOperation();
                     break;
                 case 7:
-
+                    DeleteItemByTypingItemsId();
                     break;
                 case 8:
-
+                    SearchItemInWarehouseByTitleOperation();
                     break;
             }
         }
 
-
-
+        //menu by user
         public static void WholeUserOpeation()
         {
             var loggingcontroller4 = new LogingController();
 
-            Console.WriteLine("Witaj Co chcesz dzisiaj zrobić ");
-            Console.WriteLine("");
 
             Console.WriteLine("1. Otworzyć magazyn");
             Console.WriteLine("2. Dodać nową rzecz do magazynu");
             Console.WriteLine("3. Usunąć rzecz z magazynu");
-            Console.WriteLine("4. Wyszukać element z magazynu po jego Id");
+            Console.WriteLine("4. Wyszukać element z magazynu po jego nazwie");
 
             int menuEmployee = Convert.ToInt32(Console.ReadLine());
 
             switch (menuEmployee)
             {
                 case 1:
-                    //magazyn diplay
+                    DisplayWholeWarehouseOperation();
                     break;
                 case 2:
-                    //dodac do magazynu
+                    AddingNewItemIntoWarehouseOperation();
                     break;
                 case 3:
-                    //usunac z magazynu
+                    DeleteItemByTypingItemsId();
                     break;
                 case 4:
-                    //wyszukac element z magazynu po jego id
+                    SearchItemInWarehouseByTitleOperation();
                     break;
             }
 
-
-
-
-
         }
 
+        //logowanie
+        static void LoggingFormOperation()
+        {
+            var loggingcontroller3 = new LogingController();
+
+            Console.WriteLine("WITAMY W APLIKACJI LOGIN MASTER. CO CHCIAŁBYŚ ZROBIĆ?");
+            Console.WriteLine("Logowanie - wpisz L | Rejestracja - wpisz R");
+
+            char wybórAkcjiLogowanieRejestracja = Convert.ToChar(Console.ReadLine());
+
+            switch (wybórAkcjiLogowanieRejestracja)
+            {
+                case 'L':
+                    loggingcontroller3.LoggingOnTheStart();
+                    break;
+                case 'R':
+                    RegisterFormOperation();
+                    break;
+            }
+        }
+
+        //registration
+        static void RegisterFormOperation()
+        {
+            var loggingcontroller2 = new LogingController();
+
+            Console.WriteLine("Podaj dane użytkownika:");
+
+            Console.Write("Nazwa: ");
+            string username = Console.ReadLine();
+
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
+
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+
+            bool isAmdmin = false;
+
+            loggingcontroller2.AddingUsersByAdmin(username, password, email, isAmdmin);
+
+            Console.WriteLine("Pomyślnie zarejestrowano!");
+        }
+
+
+        //about employee
         static void AddingEmployeeOperation()
         {
             var controller1 = new ControlEmployee();
@@ -120,15 +161,10 @@
             Console.Write("Miasto: ");
             string city = Console.ReadLine();
 
-            // Dodaj pracownika
             controller1.AddEmployee(firstName, lastName, position, email, phoneNumber, address, city);
 
             Console.WriteLine("Nowy pracownik został dodany.");
 
-            //Console.WriteLine("Podaj id pracownika do usuniecia");
-            //int employeeId = Convert.ToInt32(Console.ReadLine());
-
-            //controller1.DeleteEmployee(employeeId);
         }
 
         static void DisplayAllEmployeesOperation()
@@ -194,46 +230,51 @@
             }
         }
 
-        static void RegisterFormOperation()
+
+        //about warehouse
+        static void DisplayWholeWarehouseOperation()
         {
-            var loggingcontroller2 = new LogingController();
+            var warehouse1 = new Warehouse();
 
-            Console.WriteLine("Podaj dane użytkownika:");
-
-            Console.Write("Nazwa: ");
-            string username = Console.ReadLine();
-
-            Console.Write("Password: ");
-            string password = Console.ReadLine();
-
-            Console.Write("Email: ");
-            string email = Console.ReadLine();
-
-            bool isAmdmin = false;
-
-            loggingcontroller2.AddingUsersByAdmin(username, password, email, isAmdmin);
-
-            Console.WriteLine("Pomyślnie zarejestrowano!");
+            warehouse1.DisplayWarehouse();
         }
 
-        static void LoggingFormOperation()
+        static void AddingNewItemIntoWarehouseOperation()
         {
-            var loggingcontroller3 = new LogingController();
+            var warehouse2 = new Warehouse();
 
-            Console.WriteLine("WITAMY W APLIKACJI LOGIN MASTER. CO CHCIAŁBYŚ ZROBIĆ?");
-            Console.WriteLine("Logowanie - wpisz L | Rejestracja - wpisz R");
+            
 
-            char wybórAkcjiLogowanieRejestracja = Convert.ToChar(Console.ReadLine());
+            Console.WriteLine("Podaj dane przedmiotu, który został przywieziony na magazyn");
 
-            switch (wybórAkcjiLogowanieRejestracja)
-            {
-                case 'L':
-                    loggingcontroller3.LoggingOnTheStart();
-                    break;
-                case 'R':
-                    RegisterFormOperation();
-                    break;
-            }
+            Console.WriteLine("Podaj nazwe przedmiotu");
+            string? itemName = Console.ReadLine();
+
+            Console.WriteLine("Podaj ilość");
+            int quantity = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Opis przedmiotu (Można zostawić puste)");
+            string description = Console.ReadLine();
+
+            warehouse2.AddWarehouse(itemName, quantity, description);
+
+
+        }
+
+        static void DeleteItemByTypingItemsId()
+        {
+            var warehouse3 = new Warehouse();
+
+            Console.WriteLine("Podaj id przedmiotu, którego chcesz usunąć z bazy danych");
+
+            warehouse3.DeleteWarehouse(Convert.ToInt32(Console.ReadLine()));
+        }
+
+        static void SearchItemInWarehouseByTitleOperation()
+        {
+            var warehouse4 = new Warehouse();
+
+            warehouse4.SearchItemInWarehouse();
         }
 
     }
